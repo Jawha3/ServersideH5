@@ -1,5 +1,7 @@
-﻿using JwhH5.Codes;
+﻿using JwhH5.Areas.Identity.Codes;
+using JwhH5.Codes;
 using JwhH5.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,30 +17,41 @@ namespace JwhH5.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly Class1 _class1;
         private readonly HashingExample _hashingExample;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly UserRoleHandler _userRoleHandler;
 
-        public HomeController(ILogger<HomeController> logger, Class1 class1, HashingExample hashingExample)
+        public HomeController(ILogger<HomeController> logger, 
+            Class1 class1, 
+            HashingExample hashingExample, 
+            IServiceProvider serviceProvider, 
+            UserRoleHandler userRoleHandler)
         {
             _logger = logger;
             _class1 = class1;
-            _hashingExample = hashingExample;
+            _serviceProvider = serviceProvider;
+            _userRoleHandler = userRoleHandler;
         }
 
-        public IActionResult Index()
+        [Authorize("RequireAuthenticatedUser")]
+        public async Task <IActionResult> Index()
         {
-            string txt = "Hello World";
-            string txt1 = "Testing";
+           await _userRoleHandler.CreateRole("jannie.11@hotmail.com", "Admin", _serviceProvider);
 
-            string myText1 = _class1.GetText();
-            string myText2 = _class1.GetMoreText();
+            //string txt = "Hello World";
+            //string txt1 = "Testing";
 
-            string myHashedText = _hashingExample.GetHashedText_MD5(txt);
-            string bcryptText = _hashingExample.GetEncryptedText_BCrypt(txt1);
+            //string myText1 = _class1.GetText();
+            //string myText2 = _class1.GetMoreText();
 
+            //string myHashedText = _hashingExample.GetHashedText_MD5(txt);
+            //string bcryptText = _hashingExample.GetEncryptedText_BCrypt(txt1);
 
-            IndexModel myModel = new IndexModel() { Text1 = myText1, Text2 = myHashedText, Text3 = bcryptText};
+            IndexModel myModel = new IndexModel() { };
+            //IndexModel myModel = new IndexModel() { Text1 = myText1, Text2 = myHashedText, Text3 = bcryptText};
             return View(model: myModel);
         }
 
+        [Authorize(Policy = "RequireAdminUser")]
         public IActionResult Privacy()
         {
             return View();

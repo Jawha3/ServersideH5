@@ -18,7 +18,7 @@ namespace JwhH5.Codes
 
             // Konverter til string
             string hashedValueAsString = Convert.ToBase64String(valueT);
-
+            
             return hashedValueAsString;
         }
 

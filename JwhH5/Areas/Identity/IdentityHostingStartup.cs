@@ -20,7 +20,22 @@ namespace JwhH5.Areas.Identity
                         context.Configuration.GetConnectionString("JwhH5ContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<JwhH5Context>();
+
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("RequireAuthenticatedUser", policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                    });
+
+                    options.AddPolicy("RequireAdminUser", policy =>
+                    {
+                        policy.RequireRole("Admin");
+                    });
+
+                });
             });
         }
     }

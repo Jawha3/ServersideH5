@@ -1,3 +1,4 @@
+using JwhH5.Areas.Identity.Codes;
 using JwhH5.Codes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,15 +28,8 @@ namespace JwhH5
             services.AddControllersWithViews();
             services.AddSingleton<Class1>();
             services.AddSingleton<HashingExample>();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireAuthenticatedUser", policy =>
-                {
-                    policy.RequireAuthenticatedUser();
-                });
-
-            });
+            services.AddTransient<UserRoleHandler>();
+           
             //services.AddTransient<>
         }
 
