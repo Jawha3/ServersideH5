@@ -1,3 +1,4 @@
+using JwhH5.Codes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,17 @@ namespace JwhH5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<Class1>();
+            services.AddSingleton<HashingExample>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAuthenticatedUser", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                });
+
+            });
             //services.AddTransient<>
         }
 
@@ -45,6 +57,7 @@ namespace JwhH5
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -52,6 +65,8 @@ namespace JwhH5
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }
