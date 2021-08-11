@@ -29,7 +29,10 @@ namespace JwhH5
             services.AddSingleton<Class1>();
             services.AddSingleton<HashingExample>();
             services.AddTransient<UserRoleHandler>();
-           
+            services.AddTransient<CryptExample>();
+
+            services.AddDataProtection();
+                       
             //services.AddTransient<>
         }
 
