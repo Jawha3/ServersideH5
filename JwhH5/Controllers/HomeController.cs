@@ -68,7 +68,8 @@ namespace JwhH5.Controllers
         [Authorize(Policy = "RequireAdminUser")]
         public IActionResult Privacy()
         {
-            return View();
+            ToDoItem toDoItem = new() { Id = 1, Titel = "Først", Beskrivelse = "Første item."};
+            return View(model: toDoItem);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
