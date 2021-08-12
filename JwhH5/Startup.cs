@@ -1,5 +1,6 @@
 using JwhH5.Areas.Identity.Codes;
 using JwhH5.Codes;
+using JwhH5.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace JwhH5
             services.AddSingleton<HashingExample>();
             services.AddTransient<UserRoleHandler>();
             services.AddTransient<CryptExample>();
+            services.AddTransient<SQLqueries>();
 
             services.AddDataProtection();
                        

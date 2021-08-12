@@ -14,7 +14,7 @@ namespace JwhH5.Areas.Identity.Codes
             var RoleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = _serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-           await RoleManager.CreateAsync(new IdentityRole(role));
+            await RoleManager.CreateAsync(new IdentityRole(role));           
 
             IdentityUser identityUser = await UserManager.FindByEmailAsync(user);
             await UserManager.AddToRoleAsync(identityUser, role);

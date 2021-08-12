@@ -5,25 +5,9 @@
 
 @inject UserManager<IdentityUser> UserManager
 
-@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
-
-@*<form method="post" action="">
-        Titel:<br />
-        <input type="text" name="Titel" value="" /><br />
-        Beskrivelse:<br />
-        <input type="text" name="Beskrivelse" value="" /><br /><br />
-        <input type="submit" value="Submit" class="submit" /><br /><br />
-        <input type="text" name="UserName" disabled value="@UserManager.GetUserName(User)" />
-
-
-    </form>*@
-
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-controller="ToDoController" asp-action="InsertData">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Titel" class="control-label"></label>
@@ -46,5 +30,4 @@
         </form>
     </div>
 </div>
-
 

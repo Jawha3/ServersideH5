@@ -22,6 +22,7 @@ namespace JwhH5.Controllers
         private readonly UserRoleHandler _userRoleHandler;
         private readonly IDataProtector _dataProtector;
         private readonly CryptExample _cryptExample;
+        private readonly SQLqueries _sQLqueries;
 
         public HomeController(ILogger<HomeController> logger, 
             Class1 class1, 
@@ -29,7 +30,7 @@ namespace JwhH5.Controllers
             IServiceProvider serviceProvider, 
             UserRoleHandler userRoleHandler, 
             IDataProtectionProvider dataProtector,
-            CryptExample cryptExample)
+            CryptExample cryptExample, SQLqueries sQLqueries)
         {
             _logger = logger;
             _class1 = class1;
@@ -37,6 +38,7 @@ namespace JwhH5.Controllers
             _userRoleHandler = userRoleHandler;            
             _cryptExample = cryptExample;
             _dataProtector = dataProtector.CreateProtector("JwhH5.CryptExample.SuperSecretKey");
+            _sQLqueries = sQLqueries;
 
         }
 
@@ -46,7 +48,7 @@ namespace JwhH5.Controllers
 
             //await _userRoleHandler.CreateRole("jannie.11@hotmail.com", "Admin", _serviceProvider);
 
-
+           
             string txt = "Hello World";
             string txt1 = "Testing";
             string txt3 = "Encrypting text...";
@@ -66,9 +68,10 @@ namespace JwhH5.Controllers
         }
 
         [Authorize(Policy = "RequireAdminUser")]
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            ToDoItem toDoItem = new() { Id = 1, Titel = "Først", Beskrivelse = "Første item."};
+
+            ToDoModel toDoItem = new();
             return View(model: toDoItem);
         }
 
