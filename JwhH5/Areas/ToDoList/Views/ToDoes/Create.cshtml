@@ -1,14 +1,18 @@
-﻿@model JwhH5.Models.ToDoModel
+﻿@model JwhH5.Areas.ToDoList.Models.ToDo
 
-@using Microsoft.AspNetCore.Identity
-@using static JwhH5.Models.SQLqueries
+@{
+    ViewData["Title"] = "Create";
+}
 
-@inject UserManager<IdentityUser> UserManager
+<h1>Create</h1>
 
+<h4>ToDo</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="ToDoController" asp-action="InsertData">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Titel" class="control-label"></label>
                 <input asp-for="Titel" class="form-control" />
@@ -20,8 +24,8 @@
                 <span asp-validation-for="Beskrivelse" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @*<label asp-for="UserName" class="control-label"></label>*@
-                <input asp-for="UserName" class="form-control" value="@User.Identity.Name" hidden />
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" value="@User.Identity.Name" class="form-control" readonly  />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,5 +33,9 @@
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 

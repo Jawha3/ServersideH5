@@ -1,9 +1,11 @@
 using JwhH5.Areas.Identity.Codes;
+using JwhH5.Areas.ToDoList.Models;
 using JwhH5.Codes;
 using JwhH5.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,6 +36,9 @@ namespace JwhH5
             services.AddTransient<SQLqueries>();
 
             services.AddDataProtection();
+
+            var connection = Configuration.GetConnectionString("ToDoContextConnection");
+            services.AddDbContext<ToDoServerContext>(options => options.UseSqlServer(connection));
                        
             //services.AddTransient<>
         }

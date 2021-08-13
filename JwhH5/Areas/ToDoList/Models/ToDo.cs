@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace JwhH5.Models
+#nullable disable
+
+namespace JwhH5.Areas.ToDoList.Models
 {
-    public class ToDoModel
+    public partial class ToDo
     {
         public int Id { get; set; }
         public string UserName { get; set; }

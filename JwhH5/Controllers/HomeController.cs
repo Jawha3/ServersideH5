@@ -68,11 +68,12 @@ namespace JwhH5.Controllers
         }
 
         [Authorize(Policy = "RequireAdminUser")]
-        public async Task<IActionResult> Privacy()
+        public IActionResult Privacy()
         {
 
-            ToDoModel toDoItem = new();
-            return View(model: toDoItem);
+            //ToDoModel toDoItem = new();
+            // return View(model: toDoItem);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

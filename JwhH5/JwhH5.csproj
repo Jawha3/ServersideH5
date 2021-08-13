@@ -22,4 +22,10 @@
     <Folder Include="Areas\ToDoList\Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Files\JwhH5.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
